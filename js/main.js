@@ -1,13 +1,32 @@
 let canvas = document.getElementById('output');
 let context = canvas.getContext('2d');
 
-let firstNameInput = document.getElementById("firstname")
-firstNameInput.addEventListener('input', onValueChanged);
+document.getElementById("firstname").addEventListener('input', onValueChanged);
+document.getElementById("surname").addEventListener('input', onValueChanged);
+document.getElementById("phone").addEventListener('input', onValueChanged);
 
+let userData = {
+    firstname: '',
+    surname: '',
+    phone: '',
+}
 function onValueChanged(event)
 {
-    let code = qrcodegen.QrCode.encodeText(event.target.value, qrcodegen.QrCode.Ecc.MEDIUM)
+    const id = event.target.id;
+    userData[id] = event.target.value
+    let vcard = buildVCard(userData['firstname'], userData['surname'], userData['phone']);
+    let code = qrcodegen.QrCode.encodeText(vcard, qrcodegen.QrCode.Ecc.MEDIUM)
     updateCanvas(code)
+}
+
+function buildVCard(firstname, surname, phone) {
+    console.log(`${firstname} ${surname} ${phone}`);
+    return `\
+BEGIN:VCARD
+VERSION:4.0
+N:${surname??''};${firstname??''};;
+TEL;TYPE#home,voice;VALUE#uri:tel:${phone}
+END:VCARD`;
 }
 
 function updateCanvas(code)

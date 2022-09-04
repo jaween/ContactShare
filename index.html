@@ -2,8 +2,33 @@
 <head>
     <script src="js/qrcodegen-v1.8.0-es6.js"></script>
     <script type="module" src="js/main.js"></script>
+    <style>
+        #output {
+            width: 200px;
+            height: 200px;
+            image-rendering: pixelated;
+            display:block;
+            text-align: center;
+        }
+
+        #user-data {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input {
+            margin: 4px;
+            height: 40px;
+        }
+
+    </style>
 </head>
 <body>
-    <input placeholder="First Name" id="firstname"/>
-    <canvas id="output" style="image-rendering:pixelated"></canvas>
+    <canvas id="output"></canvas>
+    <br/>
+    <div id="user-data">
+        <input placeholder="First Name" id="firstname"/>
+        <input placeholder="Surname" id="surname"/>
+        <input placeholder="Phone number" id="phone" type="tel"/>
+    </div>
 </body>
