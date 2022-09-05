@@ -13,14 +13,18 @@ let userData = {
 function onValueChanged(event) {
   const id = event.target.id;
   userData[id] = event.target.value;
-  let vcard = buildVCard(
+  saveUserData(userData);
+  rebuild();
+}
+
+function rebuild() {
+  let vCard = buildVCard(
     userData["firstname"],
     userData["surname"],
     userData["phone"]
   );
-  let code = qrcodegen.QrCode.encodeText(vcard, qrcodegen.QrCode.Ecc.MEDIUM);
+  let code = qrcodegen.QrCode.encodeText(vCard, qrcodegen.QrCode.Ecc.MEDIUM);
   updateCanvas(code);
-  saveUserData(userData);
 }
 
 function buildVCard(firstname, surname, phone) {
@@ -58,8 +62,9 @@ function loadUserData() {
 }
 
 window.addEventListener("load", (event) => {
-  const userData = loadUserData();
+  userData = loadUserData();
   for (const key of Object.keys(userData)) {
     document.getElementById(key).value = userData[key];
   }
+  rebuild();
 });
