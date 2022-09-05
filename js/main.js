@@ -20,6 +20,7 @@ function onValueChanged(event) {
   );
   let code = qrcodegen.QrCode.encodeText(vcard, qrcodegen.QrCode.Ecc.MEDIUM);
   updateCanvas(code);
+  saveUserData(userData);
 }
 
 function buildVCard(firstname, surname, phone) {
@@ -45,3 +46,20 @@ function updateCanvas(code) {
     }
   }
 }
+
+function saveUserData(userData) {
+  const userDataString = JSON.stringify(userData);
+  localStorage.setItem("userData", userDataString);
+}
+
+function loadUserData() {
+  const userDataString = localStorage.getItem("userData") ?? "{}";
+  return JSON.parse(userDataString);
+}
+
+window.addEventListener("load", (event) => {
+  const userData = loadUserData();
+  for (const key of Object.keys(userData)) {
+    document.getElementById(key).value = userData[key];
+  }
+});
