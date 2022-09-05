@@ -5,7 +5,7 @@
   "background_color": "#ffffff",
   "display": "standalone",
   "scope": "/",
-  "start_url": "https://gayanediriweera.github.io/ContactShare/",
+  "start_url": "https://jaween.github.io/ContactShare/",
   "description": "A simple tool for managing and sharing your contact information",
   "orientation": "any",
   "icons": [
