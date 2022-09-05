@@ -2,6 +2,27 @@
 <head>
   <script src="js/qrcodegen-v1.8.0-es6.js"></script>
   <script type="module" src="js/main.js"></script>
+  <title>Contact Share</title>
+  <link
+    rel="icon"
+    type="image/png"
+    href="https://upload.wikimedia.org/wikipedia/commons/8/83/LCH_Gradient_Example.png"
+  />
+
+  <!-- Progressive web app support -->
+  <link rel="manifest" href="/manifest.json" />
+  <script>
+    if (!navigator.serviceWorker.controller) {
+      navigator.serviceWorker
+        .register("service_worker.js")
+        .then((registration) => {
+          console.log(
+            `Service worker registered for scope ${registration.scope}`
+          );
+        });
+    }
+  </script>
+
   <style>
     #output {
       width: 200px;
