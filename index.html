@@ -1,54 +1,58 @@
 <!DOCTYPE html>
+<html>
 <head>
-  <script src="js/qrcodegen-v1.8.0-es6.js"></script>
-  <script type="module" src="js/main.js"></script>
-  <title>Contact Share</title>
-  <link
-    rel="icon"
-    type="image/png"
-    href="https://upload.wikimedia.org/wikipedia/commons/8/83/LCH_Gradient_Example.png"
-  />
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
 
-  <!-- Progressive web app support -->
-  <link rel="manifest" href="manifest.json" />
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="/ContactShare/">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="flutter_mockup">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>flutter_mockup</title>
+  <link rel="manifest" href="manifest.json">
+
   <script>
-    if (!navigator.serviceWorker.controller) {
-      navigator.serviceWorker
-        .register("service_worker.js")
-        .then((registration) => {
-          console.log(
-            `Service worker registered for scope ${registration.scope}`
-          );
-        });
-    }
+    // The value below is injected by flutter build, do not touch.
+    var serviceWorkerVersion = '3655302012';
   </script>
-
-  <style>
-    #output {
-      width: 200px;
-      height: 200px;
-      image-rendering: pixelated;
-      display: block;
-      text-align: center;
-    }
-
-    #user-data {
-      display: flex;
-      flex-direction: column;
-    }
-
-    input {
-      margin: 4px;
-      height: 40px;
-    }
-  </style>
+  <!-- This script adds the flutter initialization JS code -->
+  <script src="flutter.js" defer></script>
 </head>
 <body>
-  <canvas id="output"></canvas>
-  <br />
-  <div id="user-data">
-    <input placeholder="First Name" id="firstname" />
-    <input placeholder="Surname" id="surname" />
-    <input placeholder="Phone number" id="phone" type="tel" />
-  </div>
+  <script>
+    window.addEventListener('load', function(ev) {
+      // Download main.dart.js
+      _flutter.loader.loadEntrypoint({
+        serviceWorker: {
+          serviceWorkerVersion: serviceWorkerVersion,
+        }
+      }).then(function(engineInitializer) {
+        return engineInitializer.initializeEngine();
+      }).then(function(appRunner) {
+        return appRunner.runApp();
+      });
+    });
+  </script>
 </body>
+</html>
